@@ -81,7 +81,6 @@ public class PlayerActivity extends AppCompatActivity
                     musicService.seekTo(progress * 1000);
                 }
             }
-
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
 
@@ -361,8 +360,8 @@ public class PlayerActivity extends AppCompatActivity
             });
         }
         else {
-            showNotification(R.drawable.ic_pause);
             playPauseBtn.setImageResource(R.drawable.ic_pause);
+            showNotification(R.drawable.ic_pause);
             musicService.start();
             seekBar.setMax(musicService.getDuration() / 1000);
             PlayerActivity.this.runOnUiThread(new Runnable() {
@@ -542,6 +541,7 @@ public class PlayerActivity extends AppCompatActivity
     public void onServiceConnected(ComponentName componentName, IBinder service) {
         MusicService.MyBinder myBinder =(MusicService.MyBinder) service;
         musicService = myBinder.getService();
+        musicService.setCallBack(this);
         Toast.makeText(this, "Connected" + musicService,
                 Toast.LENGTH_SHORT).show();
         //set thanh seekbar = thời lượng bài nhạc
@@ -577,7 +577,7 @@ public class PlayerActivity extends AppCompatActivity
                 .getBroadcast(this, 0 , nextIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
         byte[] picture = null;
-        picture = getAlbumArt(musicFiles.get(position).getPath());
+        picture = getAlbumArt(listSongs.get(position).getPath());
         Bitmap thumb = null;
         if(picture != null){
             thumb = BitmapFactory.decodeByteArray(picture, 0 , picture.length);
@@ -587,8 +587,8 @@ public class PlayerActivity extends AppCompatActivity
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID_2)
                 .setSmallIcon(playPauseBtn)
                 .setLargeIcon(thumb)
-                .setContentTitle(musicFiles.get(position).getTitle())
-                .setContentText(musicFiles.get(position).getArtist())
+                .setContentTitle(listSongs.get(position).getTitle())
+                .setContentText(listSongs.get(position).getArtist())
                 .addAction(R.drawable.ic_skip_previous, "Previous", prevPending)
                 .addAction(playPauseBtn, "Pause", pausePending)
                 .addAction(R.drawable.ic_skip_next, "Next", nextPending)
