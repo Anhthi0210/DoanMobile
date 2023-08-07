@@ -22,10 +22,10 @@
             android:name=".AlbumDetails"
             android:exported="false" />
         <activity
-            android:name=".PlayerActivity"
+            android:name=".Activity.PlayerActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,7 +34,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".MusicService" android:enabled="true" />
+        <service android:name=".Service.MusicService" android:enabled="true" />
         <receiver android:name="com.example.myapplication.NotificationReceiver" android:enabled="true"
             android:exported="true">
             <intent-filter>

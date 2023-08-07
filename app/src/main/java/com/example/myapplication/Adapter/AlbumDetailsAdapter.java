@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -14,13 +14,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.myapplication.DAO.MusicFiles;
+import com.example.myapplication.Activity.PlayerActivity;
+import com.example.myapplication.R;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class AlbumDetailsAdapter extends RecyclerView.Adapter<AlbumDetailsAdapter.MyHolder> {
     private Context mContext;
-    static ArrayList<MusicFiles> albumFiles;
+    public static ArrayList<MusicFiles> albumFiles;
     public AlbumDetailsAdapter(Context mContext, ArrayList<MusicFiles> albumFiles) {
         this.mContext = mContext;
         this.albumFiles = albumFiles;
@@ -51,7 +54,7 @@ public class AlbumDetailsAdapter extends RecyclerView.Adapter<AlbumDetailsAdapte
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(mContext,PlayerActivity.class);
+                Intent intent=new Intent(mContext, PlayerActivity.class);
                 intent.putExtra("sender","albumDetails");
                 intent.putExtra("position",position);
                 mContext.startActivity(intent);

@@ -1,19 +1,20 @@
-package com.example.myapplication;
+package com.example.myapplication.Fragment;
 
-import static com.example.myapplication.MainActivity.albums;
-import static com.example.myapplication.MainActivity.musicFiles;
+import static com.example.myapplication.Activity.MainActivity.albums;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.myapplication.Adapter.AlbumAdapter;
+import com.example.myapplication.R;
+
 public class AlbumFragment extends Fragment {
     RecyclerView recyclerView;
     AlbumAdapter albumAdapter;

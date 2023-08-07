@@ -1,6 +1,6 @@
-package com.example.myapplication;
+package com.example.myapplication.Service;
 
-import static com.example.myapplication.PlayerActivity.listSongs;
+import static com.example.myapplication.Activity.PlayerActivity.listSongs;
 
 import android.app.Service;
 import android.content.Intent;
@@ -12,6 +12,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+
+import com.example.myapplication.DAO.MusicFiles;
+import com.example.myapplication.Interface.ActionPlaying;
 
 import java.util.ArrayList;
 
@@ -41,7 +44,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
 
 
     public class MyBinder extends Binder{
-        MusicService getService(){
+        public MusicService getService(){
             return MusicService.this;
         }
     }
@@ -100,48 +103,47 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         }
     }
 
-    void start(){
+    public void start(){
         mediaPlayer.start();
 
     }
-    boolean isPlaying(){
+    public boolean isPlaying(){
             return mediaPlayer.isPlaying();
     }
-    void stop(){
+    public void stop(){
         mediaPlayer.stop();
     }
-    void release(){
+    public void release(){
         mediaPlayer.release();
     }
-    int getDuration(){
+    public int getDuration(){
         return mediaPlayer.getDuration();
     }
-    void seekTo(int position){
+    public void seekTo(int position){
         mediaPlayer.seekTo(position);
     }
-    int getCurrentPosition(){
+    public int getCurrentPosition(){
         return mediaPlayer.getCurrentPosition();
     }
-    void createMediaPlayer(int position){
+    public void createMediaPlayer(int position){
         uri = Uri.parse(musicFiles.get(position).getPath());
         mediaPlayer = MediaPlayer.create(getBaseContext(), uri);
     }
-    void pause(){
+    public void pause(){
         mediaPlayer.pause();
     }
-    void OnCompleted(){
+    public void OnCompleted(){
         mediaPlayer.setOnCompletionListener(this);
     }
     @Override
     public void onCompletion(MediaPlayer mp) {
         if (actionPlaying != null){
             actionPlaying.nextBtnBtnClicked();
+            mediaPlayer.start();
         }
-        createMediaPlayer(position);
-        mediaPlayer.start();
-        OnCompleted();
+
     }
-    void setCallBack(ActionPlaying actionPlaying){
+    public void setCallBack(ActionPlaying actionPlaying){
         this.actionPlaying = actionPlaying;
     }
 }

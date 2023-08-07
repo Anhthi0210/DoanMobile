@@ -7,7 +7,7 @@
     android:id="@+id/mContainer"
     android:background="@drawable/main_bg"
     android:orientation="vertical"
-    tools:context=".PlayerActivity">
+    tools:context=".Activity.PlayerActivity">
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"

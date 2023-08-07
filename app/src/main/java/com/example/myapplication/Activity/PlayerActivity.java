@@ -1,20 +1,18 @@
-package com.example.myapplication;
+package com.example.myapplication.Activity;
 
-import static com.example.myapplication.AlbumDetailsAdapter.albumFiles;
+import static com.example.myapplication.Adapter.AlbumDetailsAdapter.albumFiles;
 import static com.example.myapplication.ApplicationClass.ACTION_NEXT;
 import static com.example.myapplication.ApplicationClass.ACTION_PLAY;
 import static com.example.myapplication.ApplicationClass.ACTION_PREVIOUS;
 import static com.example.myapplication.ApplicationClass.CHANNEL_ID_2;
-import static com.example.myapplication.MainActivity.musicFiles;
-import static com.example.myapplication.MainActivity.repeatBoolean;
-import static com.example.myapplication.MainActivity.shuffleBoolean;
-import static com.example.myapplication.MusicAdapter.mFiles;
+import static com.example.myapplication.Activity.MainActivity.musicFiles;
+import static com.example.myapplication.Activity.MainActivity.repeatBoolean;
+import static com.example.myapplication.Activity.MainActivity.shuffleBoolean;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.palette.graphics.Palette;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -33,9 +31,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
-import android.provider.MediaStore;
 import android.support.v4.media.session.MediaSessionCompat;
-import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -46,6 +42,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.myapplication.Interface.ActionPlaying;
+import com.example.myapplication.DAO.MusicFiles;
+import com.example.myapplication.Service.MusicService;
+import com.example.myapplication.NotificationReceiver;
+import com.example.myapplication.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
@@ -53,7 +54,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class PlayerActivity extends AppCompatActivity
-        implements  ActionPlaying, ServiceConnection {
+        implements ActionPlaying, ServiceConnection {
 
     TextView song_name, artist_name, duration_played, duration_total;
     ImageView cover_art, nextBtn, prevBtn, backBtn, shuffleBtn, repeatBtn;

@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.ContentUris;
@@ -19,6 +19,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.myapplication.DAO.MusicFiles;
+import com.example.myapplication.Activity.PlayerActivity;
+import com.example.myapplication.R;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
@@ -31,7 +34,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
     private Context mContext;
     static ArrayList<MusicFiles> mFiles;
 
-    MusicAdapter(Context mContext, ArrayList<MusicFiles> mFiles){
+    public MusicAdapter(Context mContext, ArrayList<MusicFiles> mFiles){
         this.mFiles = mFiles;
         this.mContext = mContext;
     }
@@ -125,7 +128,7 @@ public class MusicAdapter extends RecyclerView.Adapter<MusicAdapter.MyViewHolder
         }
         return art;
     }
-    void updateList(ArrayList<MusicFiles> musicFilesArrayList){
+    public void updateList(ArrayList<MusicFiles> musicFilesArrayList){
         mFiles = new ArrayList<>();
         mFiles.addAll(musicFilesArrayList);
         notifyDataSetChanged();

@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,9 +21,11 @@ import android.provider.MediaStore;
 import android.util.Log;
 
 import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Toast;
 
+import com.example.myapplication.Fragment.AlbumFragment;
+import com.example.myapplication.DAO.MusicFiles;
+import com.example.myapplication.R;
+import com.example.myapplication.Fragment.SongsFragment;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -31,9 +33,9 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     public static final int REQUEST_CODE = 1;
-    static ArrayList<MusicFiles> musicFiles;
+    public static ArrayList<MusicFiles> musicFiles;
     static boolean shuffleBoolean=false,repeatBoolean=false;
-    static ArrayList<MusicFiles> albums= new ArrayList<>();
+    public static ArrayList<MusicFiles> albums= new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

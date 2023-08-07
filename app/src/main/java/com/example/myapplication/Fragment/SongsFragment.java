@@ -1,7 +1,6 @@
-package com.example.myapplication;
+package com.example.myapplication.Fragment;
 
-import static com.example.myapplication.MainActivity.musicFiles;
-import static com.example.myapplication.MusicAdapter.mFiles;
+import static com.example.myapplication.Activity.MainActivity.musicFiles;
 
 import android.os.Bundle;
 
@@ -12,9 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.myapplication.Adapter.MusicAdapter;
+import com.example.myapplication.R;
+
 public class SongsFragment extends Fragment {
     RecyclerView recyclerView;
-    static MusicAdapter musicAdapter;
+    public static MusicAdapter musicAdapter;
     public SongsFragment() {
         // Required empty public constructor
     }

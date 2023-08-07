@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Interface;
 
 public interface ActionPlaying {
     void playPauseBtnClicked();

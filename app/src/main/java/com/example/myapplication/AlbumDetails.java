@@ -1,6 +1,6 @@
 package com.example.myapplication;
 
-import static com.example.myapplication.MainActivity.musicFiles;
+import static com.example.myapplication.Activity.MainActivity.musicFiles;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.example.myapplication.Adapter.AlbumDetailsAdapter;
+import com.example.myapplication.DAO.MusicFiles;
 
 import java.io.IOException;
 import java.util.ArrayList;
