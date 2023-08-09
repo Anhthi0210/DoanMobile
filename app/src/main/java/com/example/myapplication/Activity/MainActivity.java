@@ -21,6 +21,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 
 import android.view.Menu;
+import android.view.MenuItem;
 
 import com.example.myapplication.Fragment.AlbumFragment;
 import com.example.myapplication.DAO.MusicFiles;
@@ -45,10 +46,10 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     }
 
     private void permission() {
-        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
         != PackageManager.PERMISSION_GRANTED)
         {
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}
             , REQUEST_CODE);
         }
         else {
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 initViewPager();
             }
             else {
-                ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}
+                ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}
                         , REQUEST_CODE);
             }
         }
@@ -119,6 +120,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     public  static ArrayList<MusicFiles> getAllAudio(Context context){
         ArrayList<String> duplicate= new ArrayList<>();
         ArrayList<MusicFiles> tempAudioList = new ArrayList<>();
+        //sử dụng để truy vấn cơ sở dữ liệu MediaStore để lấy thông tin về các tệp âm nhạc trên thiết bị.
         Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         String[] projection = {
                 MediaStore.Audio.Media.ALBUM,
@@ -154,10 +156,10 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        /*getMenuInflater().inflate(R.menu.search,menu);
-        MenuItem menuItem= menu.findItem(R.id.search_option);*/
-        /*SearchView searchView= (SearchView) menuItem.getActionView();
-        searchView.setOnQueryTextListener(this);*/
+        getMenuInflater().inflate(R.menu.search,menu);
+        MenuItem menuItem= menu.findItem(R.id.search_option);
+        SearchView searchView= (SearchView) menuItem.getActionView();
+        searchView.setOnQueryTextListener(this);
         return super.onCreateOptionsMenu(menu);
     }
     @Override

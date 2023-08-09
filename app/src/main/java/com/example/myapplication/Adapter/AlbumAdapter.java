@@ -29,7 +29,9 @@ public class AlbumAdapter extends RecyclerView.Adapter<AlbumAdapter.MyHolder> {
         this.mContext = mContext;
         this.albumFiles = albumFiles;
     }
-
+    //MyHolder là một lớp (class) được định nghĩa để tạo ra và quản lý các view items trong một danh sách
+    // (hoặc lưới) dựa trên dữ liệu. Đoạn mã này thường được sử dụng trong việc triển khai một Adapter
+    // cho một danh sách hiển thị trong giao diện người dùng, ví dụ như một RecyclerView trong Android.
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

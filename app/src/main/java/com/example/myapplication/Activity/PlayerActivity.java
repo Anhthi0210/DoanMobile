@@ -75,6 +75,7 @@ public class PlayerActivity extends AppCompatActivity
         mediaSessionCompat = new MediaSessionCompat(getBaseContext(), "My Audio");
         initView();
         getIntentMethod();
+        //khi người dùng thay đổi vị trí trên thanh trượt, thời gian phát nhạc sẽ được điều chỉnh tương ứng thông qua dịch vụ musicService.
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -96,10 +97,14 @@ public class PlayerActivity extends AppCompatActivity
             @Override
             public void run() {
                 if(musicService != null){
+                    // lấy vị trí hiện tại của bài nhạc đang được phát trong dịch vụ musicService
+                    // và chia cho 1000 để đổi thành đơn vị giây.
                     int mCurrentPosition = musicService.getCurrentPosition() / 1000;
                     seekBar.setProgress(mCurrentPosition);
                     duration_played.setText(formattedTime(mCurrentPosition));
                 }
+                //việc cập nhật thời gian và thanh seekBar liên tục. Nó lên lịch chạy Runnable sau mỗi 1000ms (1 giây),
+                // đảm bảo rằng thông tin được cập nhật liên tục khi bài nhạc đang phát.
                 handler.postDelayed(this, 1000);
             }
         });
@@ -560,10 +565,14 @@ public class PlayerActivity extends AppCompatActivity
     }
     void showNotification(int playPauseBtn){
         Intent intent = new Intent(this, PlayerActivity.class);
+        //Đây là một PendingIntent được tạo để bắt sự kiện khi người dùng nhấp vào thông báo.
+        // Khi người dùng nhấp vào thông báo, họ sẽ được chuyển đến PlayerActivity.
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, intent,
                 PendingIntent.FLAG_MUTABLE);
+        // Đây là intent để thực hiện hành động "previous" khi người dùng nhấp vào nút "Previous" trong thông báo
         Intent prevIntent = new Intent(this, NotificationReceiver.class)
                 .setAction(ACTION_PREVIOUS);
+        //được tạo để bắt sự kiện khi người dùng nhấp vào nút "Previous" trong thông báo.
         PendingIntent prevPending = PendingIntent
                 .getBroadcast(this, 0 , prevIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
@@ -577,6 +586,7 @@ public class PlayerActivity extends AppCompatActivity
         PendingIntent nextPending = PendingIntent
                 .getBroadcast(this, 0 , nextIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
+        //Đoạn mã này tìm và lấy dữ liệu hình ảnh album nếu có.
         byte[] picture = null;
         picture = getAlbumArt(listSongs.get(position).getPath());
         Bitmap thumb = null;
@@ -593,8 +603,10 @@ public class PlayerActivity extends AppCompatActivity
                 .addAction(R.drawable.ic_skip_previous, "Previous", prevPending)
                 .addAction(playPauseBtn, "Pause", pausePending)
                 .addAction(R.drawable.ic_skip_next, "Next", nextPending)
+                //Định dạng thông báo để phù hợp với giao diện người dùng âm nhạc.
                 .setStyle(new androidx.media.app.NotificationCompat.MediaStyle()
                         .setMediaSession(mediaSessionCompat.getSessionToken()))
+                //Thiết lập mức độ ưu tiên của thông báo.
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setOnlyAlertOnce(true)
                 .build();

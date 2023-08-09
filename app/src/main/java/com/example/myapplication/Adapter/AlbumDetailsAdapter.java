@@ -55,7 +55,9 @@ public class AlbumDetailsAdapter extends RecyclerView.Adapter<AlbumDetailsAdapte
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(mContext, PlayerActivity.class);
+                //Đoạn mã này đặt một dữ liệu extra trong intent, cho biết nguồn gốc của intent là từ "albumDetails"
                 intent.putExtra("sender","albumDetails");
+                //Đoạn mã này đặt một dữ liệu extra trong intent, chứa vị trí (position) của item trong danh sách mà người dùng đã nhấn vào.
                 intent.putExtra("position",position);
                 mContext.startActivity(intent);
             }

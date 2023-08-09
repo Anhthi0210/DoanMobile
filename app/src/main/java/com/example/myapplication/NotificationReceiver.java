@@ -9,13 +9,14 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.example.myapplication.Service.MusicService;
-
+//Đây là khai báo của lớp NotificationReceiver mở rộng từ BroadcastReceiver, cho phép bạn xử lý các sự kiện phát sóng.
 public class NotificationReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         String actionName = intent.getAction();
         Intent serviceIntent = new Intent(context, MusicService.class);
         if(actionName != null){
+            //Truyền đến musicService
             switch (actionName){
                 case ACTION_PLAY:
                     serviceIntent.putExtra("ActionName", "playPause");
